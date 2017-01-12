@@ -1,0 +1,29 @@
+@charset 'utf8'
+
+/* 基准为 font-size:100px 视觉稿宽度 750  100px = 1rem */
+
+/* 42.666666667 = 320*100/750 (iPhone 5) */
+@media only screen and (min-width: 320px)
+    html
+        font-size: 42.666666667px
+
+/* 50 = 375*100/750 (iPhone 6) */
+@media only screen and (min-width: 375px)
+    html
+        font-size: 50px
+
+/* 53.33333333 = 400*100/750 (Most Android) */
+@media only screen and (min-width: 400px)
+    html
+        font-size: 53.33333333px
+
+/* 55.2 = 414*100/750 (iPhone 6 Plus) */
+@media only screen and (min-width: 414px)
+    html
+        font-size: 55.2px
+
+/* 64 = 480*100/750 (iPad)*/
+@media only screen and (min-width: 480px)
+    html
+        font-size: 64px
+

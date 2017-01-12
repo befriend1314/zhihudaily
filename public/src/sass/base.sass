@@ -1,0 +1,86 @@
+@charset "utf-8"
+
+@import "normalize.sass"
+@import "rem.sass"
+@import "variables.sass"
+
+// common_reset
+*
+    box-sizing: border-box
+a
+    text-decoration: none
+
+img
+    max-width: 100%
+    vertical-align: middle
+pre
+    word-wrap: break-word
+    white-space: pre-wrap
+    font-family: inherit
+    margin: 0
+
+ul,ol,menu,p
+    list-style: none
+    margin: 0
+    padding: 0
+.fn-fl,.fl
+    float: left
+.fn-fr,.fr
+    float: right
+
+.fn-tl
+    text-align: left
+.fn-tr
+    text-align: right
+.fn-tc
+    text-align: center
+.fn-clear,.clear
+    overflow: hidden
+    zoom: 1
+.fn-hide
+    display: none !important
+
+.block-center
+    margin-left: auto
+    margin-right: auto
+
+h1,h2,h3
+    margin: 0
+    font-size: 100%
+    font-weight: 400
+
+.single-line
+    overflow: hidden
+    word-wrap: break-word
+    white-space: nowrap
+    text-overflow: ellipsis
+
+.justify
+    display: flex
+    align-items: center
+    justify-content: space-between
+.align-center
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+.panel
+    padding: $common-padding
+.radius
+    border-radius: 50%
+
+// clear webkit
+::-webkit-scrollbar
+    display: none !important
+    width: 0
+    background-color: transparent
+button
+    border: none 0
+    outline: none
+.svg
+    vertical-align: middle
+    margin: -3px 5px 0
+body
+    font-size: 16px
+    line-height: 1.7
+    font-family: PingFangSC-Light,"Helvetica Neue",Helvetica,"Lucida Grande","Luxi Sans",Arial,"Hiragino Sans GB",STHeiti,"Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Micro Hei Mono","WenQuanYi Zen Hei","WenQuanYi Zen Hei Mono",LiGothicMed
