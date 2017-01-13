@@ -7,7 +7,7 @@
                 <p class="item-title">{{storie.title}}</p>
             </arctive>
         </section>
-        <button class="more-btn" v-on:click="laodmore()">更多2</button>
+        <button class="more-btn" v-on:click="getApi()">更多</button>
     </div>
 </template>
 
@@ -16,11 +16,13 @@
     data () {
       return {
         date: '',
+        dateCount: 0,
+        dateAPIStr: '',
         stories: '[]'
       }
     },
     created () {
-        this.$http.get('http://news.at.zhihu.com/api/4/news/before/20170112', {}, {
+        this.$http.get('http://news.at.zhihu.com/api/4/news/before/20170113', {}, {
           headers: {
             'X-Requested-With': 'XMLHttpRequest'
           },
@@ -34,7 +36,21 @@
       },
       methods: {
         loadmore: function () {
-          console.log(1)
+          this.dateCount ++
+        },
+        padNumber: function (num) {
+          if(num < 10){
+            return '0' + num
+          }else{
+            return num
+          }
+        },
+        getApi: function (n) {
+            var mydate  = new Date();
+            var sYear = mydate.getFullYear()
+            var sMon = mydate.getMonth() + 1
+            var sDate = mydate.getDate()
+          console.log('' + sYear + this.padNumber(sMon) + sDate) 
         }
       }
     }
