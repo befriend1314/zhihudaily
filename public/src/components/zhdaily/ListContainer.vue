@@ -1,13 +1,17 @@
 <template>
     <div class="list-container">
-        <section class="zhi-list">
-            <div class="list-date">{{date}}</div>
-            <arctive class="list-item" v-for="storie in stories">
-                <div class="item-preview" :style="{backgroundImage:'url('+ storie.images +')'}"></div>
-                <p class="item-title">{{storie.title}}</p>
-            </arctive>
+        <section class="zhi-list" v-for="section in storiesObj">
+            <div class="list-date">{{section.date}}</div>
+            <arctive class="list-item" v-for="storie in section.stories">
+                <router-link :to="{ name: 'news', params: { id: storie.id }}">
+                  <div class="item-preview" :style="{backgroundImage:'url('+ storie.images +')'}"></div>
+                  <p class="item-title">{{storie.title}}</p>
+                </router-link>
+                
+              </arctive>
+            
         </section>
-        <button class="more-btn" v-on:click="getApi()">更多</button>
+        <button class="more-btn" v-on:click="loadmore()">更多</button>
     </div>
 </template>
 
@@ -18,25 +22,16 @@
         date: '',
         dateCount: 0,
         dateAPIStr: '',
-        stories: '[]'
+        storiesObj: []
       }
     },
-    created () {
-        this.$http.get('http://news.at.zhihu.com/api/4/news/before/20170113', {}, {
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-          },
-          emulateJSON: true
-        }).then(function (response) {
-          this.date = response.data.date
-          this.stories = response.data.stories
-        },function (response) {
-          console.log(response)
-        })
-      },
-      methods: {
+    created: function () {
+      this.fetchList()
+    },
+    methods: {
         loadmore: function () {
           this.dateCount ++
+          this.fetchList()
         },
         padNumber: function (num) {
           if(num < 10){
@@ -46,11 +41,25 @@
           }
         },
         getApi: function (n) {
-            var mydate  = new Date();
+            var mydate  = new Date()
+            var befminutes = mydate.getTime() - 1000 * 60 * 60 * 24 * parseInt(this.dateCount)
+            mydate.setTime(befminutes)
             var sYear = mydate.getFullYear()
-            var sMon = mydate.getMonth() + 1
-            var sDate = mydate.getDate()
-          console.log('' + sYear + this.padNumber(sMon) + sDate) 
+            var sMon = this.padNumber(mydate.getMonth() + 1)
+            var sDate = this.padNumber(mydate.getDate())
+            return('' + sYear + sMon + sDate)
+        },
+        fetchList: function () {
+          this.$http.get('http://news.at.zhihu.com/api/4/news/before/' + this.getApi(this.dateCount), {}, {
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            emulateJSON: true
+          }).then(function (response) {
+            this.storiesObj.push(response.data)
+          },function (response) {
+            console.log(response)
+          })
         }
       }
     }
@@ -82,6 +91,10 @@
         padding: 14rem 1rem 1rem;
         margin: .5rem;
         text-align: left;
+    }
+    .list-item a{
+      text-decoration: none;
+      color: #000;
     }
     .item-preview {
         position: absolute;
@@ -115,4 +128,52 @@
     .more-btn:hover {
         background-color: #455569;
     }
+    .list-item {
+	display:inline-block;
+	position:relative;
+	box-sizing:border-box;
+	background-color:#fff;
+	width:18.5rem;
+	padding:14rem 1rem 1rem;
+	margin:.5rem;
+	text-align:left
+}
+.item-preview {
+	position:absolute;
+	height:14rem;
+	width:100%;
+	top:0;
+	left:0;
+	background-size:cover
+}
+.item-title {
+	font-size:1.6rem;
+	height:4rem;
+	padding:.5rem;
+	margin:0;
+	line-height:1.6;
+	overflow:hidden
+}
+.item-description {
+	text-align:left;
+	font-size:1rem;
+	line-height:1.6
+}
+@media all and (max-width:768px) {
+	.list-item {
+		width:100%;
+		padding:1rem 6rem 1rem .5rem;
+		box-sizing:border-box;
+		margin:.5rem 0
+	}
+	.item-preview {
+		position:absolute;
+		width:6rem;
+		right:.5rem;
+		top:.5rem;
+		left:inherit;
+		height:6rem
+	}
+}
+
 </style>

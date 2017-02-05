@@ -1,20 +1,15 @@
 <template>
     <header>
         <nav class="cov-nav">
-            <div class="nav-tab" v-for="item in navTba">{{item}}</div>
+            <div class="nav-tab">
+                <router-link :to="{path: '/home'}">首页</router-link>
+                <router-link :to="{path: '/theme'}">主题日报</router-link>
+                <router-link :to="{path: '/about'}">关于</router-link>
+            </div>
         </nav>
     </header>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        navTba: ['首页', '主题日报', '关于']
-      }
-    }
-  }
-</script>
 
 <style scoped>
     .cov-nav {
@@ -28,12 +23,23 @@
         font-size: 1.5rem;
         color: #fff;
     }
-    .nav-tab {
+    .nav-tab a{
         display: inline-block;
         height: 6rem;
         line-height: 6rem;
         text-align: center;
         min-width: 8rem;
         cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+    }
+    .nav-tab a:visited{
+        color: #607D8B;
+    }
+    .nav-tab a:hover {
+        color: #039be5;
+    }
+    .nav-tab a.router-link-active {
+        color: #039be5;
     }
 </style>
