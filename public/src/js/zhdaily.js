@@ -18,7 +18,7 @@ const router = new VueRouter({
     { path: '/home', component: ListContainer},
     { path: '/news/:id', name:'news', component: NewsDetail },
     { path: '/theme', name:'theme', component: Theme },
-    { path: '/themelist', name:'themelist', component: ThemeList },
+    { path: '/themelist/:id', name:'themelist', component: ThemeList },
     { path: '/about', name:'about', component: About },
     { path: '*', redirect: '/home'}
   ]

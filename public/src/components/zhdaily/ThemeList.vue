@@ -28,12 +28,7 @@
         },
         methods: {
           fillthemescont: function () {
-            if(this.$route.params.id == undefined){
-              this.id = 2
-            }else{
-              this.id = this.$route.params.id
-            }
-            this.$http.get('http://news-at.zhihu.com/api/4/theme/' + this.id, {}, {
+            this.$http.get('http://news-at.zhihu.com/api/4/theme/' + this.$route.params.id, {}, {
               headers: {
               'X-Requested-With': 'XMLHttpRequest'
             },
