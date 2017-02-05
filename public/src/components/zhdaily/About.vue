@@ -1,7 +1,8 @@
 <template>
     <div class="about-container">
         <div class="github-box">
-            <p>769970587@qq.com</p>
+            <p><span>Github:</span><a class="github-link" href="https://github.com/befriend1314/zhihudaily" target="_blank">vue-zhihudaily</a></p>
+            <p>E-mail: 769970587@qq.com</p>
         </div>
     </div>
 </template>
