@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
